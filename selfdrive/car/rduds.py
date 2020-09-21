@@ -16,7 +16,7 @@ if __name__ == "__main__":
   uds_client.communication_control(CONTROL_TYPE.DISABLE_RX_DISABLE_TX, MESSAGE_TYPE.NORMAL)
 
   print("querying addresses ...")
-  l = list(range(0x7d0))
+  l = list(range(ADDR))
   with tqdm(total=len(l)) as t:
     for i in l:
       ct = i >> 8
