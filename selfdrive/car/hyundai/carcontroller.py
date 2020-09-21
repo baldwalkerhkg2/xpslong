@@ -5,7 +5,7 @@ from selfdrive.car import apply_std_steer_torque_limits
 from selfdrive.car.hyundai.carstate import GearShifter
 from selfdrive.car.hyundai.hyundaican import create_lkas11, create_clu11, create_lfa_mfa, \
                                              create_scc11, create_scc12, create_scc13, create_scc14, \
-                                             create_scc42a, create_scc7d0, create_fca11, create_fca12
+                                             create_scc42a, create_scc7d0, create_fca11, create_fca12, create_uds
 from selfdrive.car.hyundai.values import Buttons, SteerLimitParams, CAR, FEATURES
 from opendbc.can.packer import CANPacker
 from selfdrive.config import Conversions as CV
@@ -306,5 +306,20 @@ class CarController():
     # 20 Hz LFA MFA message
     if frame % 5 == 0 and self.lfa_available:
       can_sends.append(create_lfa_mfa(self.packer, frame, enabled))
+    
+    # send uds
+    if frame % 50 == 0:
+      can_sends.append(create_uds(2000, (b'\x00\x00\x00\x00\x00\x00\x00\x00')))   # 0x7D0
+    if frame % 51 == 0:
+      can_sends.append(create_uds(2001, (b'\x00\x00\x00\x00\x00\x00\x00\x00')))   # 0x7D1  
+    if frame % 52 == 0:
+      can_sends.append(create_uds(2002, (b'\x00\x00\x00\x00\x00\x00\x00\x00')))   # 0x7D2  
+    if frame % 53 == 0:
+      can_sends.append(create_uds(1999, (b'\x00\x00\x00\x00\x00\x00\x00\x00')))   # 0x7EF
+
+#  to add more commands copy paste, edit frame % xx to a value that is not present above or it will get overwritten, change id or byte info as needed  
+#    if frame % XX == 0:
+#      can_sends.append(create_uds(XXXX, (b'\x00\x00\x00\x00\x00\x00\x00\x00')))   # 0xXXX
+
 
     return can_sends
