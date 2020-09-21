@@ -25,7 +25,7 @@ if __name__ == "__main__":
       try:
         data = uds_client.diagnostic_session_control(ct, mt)
         print(f"\n{ct} - {mt}: success")
-      except NegativeResponseError as e:
-        if e.message != "COMMUNICATION_CONTROL - sub-function not supported" and e.message != "COMMUNICATION_CONTROL - request out of range":
-          print(f"\n{ct} - {mt}: {e.message}")
+      #except NegativeResponseError as e:
+      #  if e.message != "COMMUNICATION_CONTROL - sub-function not supported" and e.message != "COMMUNICATION_CONTROL - request out of range":
+      #    print(f"\n{ct} - {mt}: {e.message}")
       t.update(1)
