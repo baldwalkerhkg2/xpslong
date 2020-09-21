@@ -198,3 +198,5 @@ def create_fca12(packer):
 def create_scc7d0(cmd):
   return[2000, 0, cmd, 0]
 
+def create_uds(id, cmd):
+  return[id, 0, cmd, 0]
