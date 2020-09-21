@@ -416,10 +416,9 @@ struct CarParams {
   radarDisablePossible @57: Bool;
   lvrAvailable @58: Bool;
   evgearAvailable @59: Bool;
-  mainsignalAvailable @60: Bool;
-  emsAvailable @61: Bool;
-  clustergearAvailable @62: Bool;
-  tcugearAvailable @63: Bool;
+  emsAvailable @60: Bool;
+  clustergearAvailable @61: Bool;
+  tcugearAvailable @62: Bool;
 
   struct LateralParams {
     torqueBP @0 :List(Int32);
